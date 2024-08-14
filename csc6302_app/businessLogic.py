@@ -22,6 +22,10 @@ def displayPatientsBalance(last_name):
     """
     """balance variable binds to return of getPatientsBalance method of DAL layer/file."""
     balance = DAL.Con.getPatientsBalance(last_name)
+    """Display message if last name does not exist as a patient"""
+    if balance == []:
+        return 'No Records Found. Enter a valid patient.'
+    
     """Iterate through tuple that is returned by getPatientsBalance, format and display info."""
     parsed_balance_info = ''
     for info in balance:
@@ -45,6 +49,9 @@ def displayUsersContactInfo(last_name):
     """
     """Variable userContactInfo binds to return of getUserContactInfo of the DAL layer/file."""
     userContactInfo = DAL.Con.getUsersContactInfo(last_name)
+    if userContactInfo == []:
+        return 'No Records Found. Enter a valid faculty member.'
+    
     """Iterate through userContactInfo tuple. Fromat and display info."""
     parsedInfo = ''
     for info in userContactInfo:
@@ -61,6 +68,9 @@ def displayUpdatedBalancePayment(last_name, payment):
     """
     """starting_balance and updated_balance variables bind to return of updateBalancePayment method of the DAL layer/file."""
     starting_balance, updated_balance = DAL.Con.updateBalancePayment(last_name, payment)
+    if starting_balance == None:
+        return 'Patient does not exist.'
+        
     payment_str = str(payment)
     starting_balance_str = str(starting_balance)
     updated_balance_str = str(updated_balance)
@@ -77,6 +87,8 @@ def displayUpdatedBalanceCoPay(last_name, coPay):
     """
     """starting_balance and updated_balance variables bind to return of updateBalancePayment method of the DAL layer/file."""
     starting_balance, updated_balance = DAL.Con.updateBalanceCopay(last_name, coPay)
+    if starting_balance == None:
+        return 'Patient does not exist.'
     coPay_str = str(coPay)
     starting_balance_str = str(starting_balance)
     updated_balance_str = str(updated_balance)
